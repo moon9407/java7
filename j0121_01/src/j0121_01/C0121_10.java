@@ -16,7 +16,7 @@ public class C0121_10 {
 		String[] title = {"번호","이름","국어","영어","수학","합계","평균"};
 		
 		// 2. 화면출력
-		loop : while(true) {
+		loop : while(true) { 
 			System.out.println("[ 학생성적프로그램 ]");
 			System.out.println("1. 학생성적입력");
 			System.out.println("2. 학생성적출력");
