@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>자바 초보자 필수 용어 정리</title>
+
+  <!--
+    - 초보자니까 "세분화"해서 정리
+  -->
+  <style>
+    /* ===== 기본(배경 흰색 / 글씨 검은색) ===== */
+    :root{
+      --bg:#ffffff;
+      --text:#000000;
+      --muted:#444;
+      --border:#e6e6e6;
+      --codebg:#f6f8fa;
+      --accent:#111;
+    }
+    html, body { height: 100%; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* ===== 레이아웃 ===== */
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 18px 80px;
+    }
+    header{
+      padding: 18px 0 10px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+    h1{
+      margin: 0 0 6px;
+      font-size: 28px;
+      letter-spacing: -0.2px;
+    }
+    .subtitle{
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* ===== 네비/카드 ===== */
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    @media (min-width: 920px){
+      .grid{
+        grid-template-columns: 280px 1fr;
+        gap: 16px;
+      }
+      .sticky{
+        position: sticky;
+        top: 14px;
+        align-self: start;
+      }
+    }
+
+    nav{
+      border:1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 14px 10px;
+      background:#fff;
+    }
+    nav .nav-title{
+      font-weight: 800;
+      margin: 0 0 10px;
+      font-size: 14px;
+    }
+    nav a{
+      display:block;
+      padding: 8px 10px;
+      border-radius: 10px;
+      text-decoration:none;
+      color: var(--text);
+      font-size: 13px;
+      border:1px solid transparent;
+    }
+    nav a:hover{
+      border-color: var(--border);
+      background: #fafafa;
+    }
+    .hint{
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    section{
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      background:#fff;
+    }
+    section + section{ margin-top: 14px; }
+
+    h2{
+      margin: 0 0 8px;
+      font-size: 18px;
+      letter-spacing: -0.2px;
+    }
+    h3{
+      margin: 14px 0 6px;
+      font-size: 15px;
+    }
+    .tag{
+      display:inline-block;
+      font-size: 11px;
+      padding: 2px 8px;
+      border:1px solid var(--border);
+      border-radius: 999px;
+      margin-left: 6px;
+      color:#111;
+    }
+    .desc{
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    @media (min-width: 740px){
+      .cards{
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .card{
+      border:1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      background:#fff;
+    }
+    .card-title{
+      margin:0 0 6px;
+      font-weight: 800;
+      font-size: 14px;
+    }
+    .mini{
+      margin:0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    pre{
+      margin: 10px 0 0;
+      background: var(--codebg);
+      border:1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      overflow:auto;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    code{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+
+    .pill{
+      display:inline-block;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      background:#fff;
+      margin: 8px 6px 0 0;
+    }
+
+    .two-col{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    @media (min-width: 740px){
+      .two-col{
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    footer{
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 12px;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <h1>자바 초보자 필수 용어 정리</h1>
+      <p class="subtitle">딱 “기초부터 문제 풀 때까지” 필요한 것만. 섹션별로 쪼개서 정리했어.</p>
+    </header>
+
+    <div class="grid">
+      <div class="sticky">
+        <nav>
+          <p class="nav-title">바로가기</p>
+          <a href="#start">0. 자바 실행 구조</a>
+          <a href="#variable">1. 변수 & 자료형</a>
+          <a href="#operator">2. 연산자</a>
+          <a href="#control">3. 조건문 & 반복문</a>
+          <a href="#array">4. 배열</a>
+          <a href="#method">5. 메소드</a>
+          <a href="#io">6. 입력/출력</a>
+          <a href="#random">7. 랜덤</a>
+          <a href="#error">8. 에러/예외</a>
+          <a href="#tips">9. 초보 생존 팁</a>
+
+          <div class="hint">
+            ✅ 공부 팁: 모르는 단어 나오면<br/>
+            여기서 그 섹션만 찾아서 읽고<br/>
+            다시 코드로 돌아가면 됨.
+          </div>
+        </nav>
+      </div>
+
+      <main>
+        <!-- =====================================================
+             0. 자바 실행 구조
+             ===================================================== -->
+        <section id="start">
+          <h2>0. 자바 실행 구조 <span class="tag">필수</span></h2>
+          <p class="desc">자바는 “클래스 안에서 시작(main)하고, 위에서 아래로 실행”이 기본 흐름이야.</p>
+
+          <div class="cards">
+            <div class="card">
+              <p class="card-title">class(클래스)</p>
+              <p class="mini">코드가 들어가는 “틀”. 자바 코드는 무조건 클래스 안에 있어야 함.</p>
+              <pre><code>public class MyClass {
+    // 코드가 여기 들어감
+}</code></pre>
+            </div>
+
+            <div class="card">
+              <p class="card-title">main 메소드</p>
+              <p class="mini">프로그램 시작점. 이게 있어야 “실행”이 됨.</p>
+              <pre><code>public static void main(String[] args) {
+    // 여기부터 실행됨
+}</code></pre>
+            </div>
+          </div>
+
+          <span class="pill">파일명 = public class 이름</span>
+          <span class="pill">위 → 아래 순서로 실행</span>
+        </section>
+
+        <!-- =====================================================
+             1. 변수 & 자료형
+             ===================================================== -->
+        <section id="variable">
+          <h2>1. 변수 & 자료형 <span class="tag">필수</span></h2>
+          <p class="desc">변수는 값을 저장하는 칸, 자료형은 “무슨 값”을 넣을지 정하는 규칙.</p>
+
+          <div class="two-col">
+            <div class="card">
+              <p class="card-title">변수(variable)</p>
+              <p class="mini">값을 저장하는 공간. 이름(변수명)으로 불러서 사용.</p>
+              <pre><code>int age = 20;      // 정수
+double pi = 3.14;  // 실수
+String name = "슬구";</code></pre>
+            </div>
+
+            <div class="card">
+              <p class="card-title">자료형(data type)</p>
+              <p class="mini">대표 5개만 먼저 외우면 됨.</p>
+              <pre><code>int     : 정수 (예: 10)
+double  : 실수 (예: 3.14)
+char    : 문자 1개 (예: 'A')
+String  : 문자열 (예: "Hello")
+boolean : true/false</code></pre>
+            </div>
+          </div>
+
+          <h3>형변환(casting) <span class="tag">자주 나옴</span></h3>
+          <p class="desc">자료형을 바꾸는 것. 특히 random 정수 만들 때 많이 씀.</p>
+          <pre><code>int n = (int)3.14;   // 3 (소수점 버림)
+double d = 10;       // 10.0 (자동 변환)</code></pre>
+        </section>
+
+        <!-- =====================================================
+             2. 연산자
+             ===================================================== -->
+        <section id="operator">
+          <h2>2. 연산자 <span class="tag">필수</span></h2>
+          <p class="desc">코드에서 “비교/조건”을 만드는 핵심 부품.</p>
+
+          <div class="two-col">
+            <div class="card">
+              <p class="card-title">비교 연산자</p>
+              <pre><code>== 같다
+!= 다르다
+>  크다
+<  작다
+>= 이상
+<= 이하</code></pre>
+            </div>
+            <div class="card">
+              <p class="card-title">논리 연산자</p>
+              <pre><code>&& 그리고(and)  : 둘 다 true여야 true
+|| 또는(or)     : 하나라도 true면 true
+!  아니다(not)  : true↔false 뒤집기</code></pre>
+            </div>
+          </div>
+
+          <h3>주의: == vs =</h3>
+          <p class="desc"><b>=</b> 는 대입(저장), <b>==</b> 는 비교(같냐?). 초보가 제일 많이 헷갈림.</p>
+          <pre><code>int a = 10;        // 저장
+System.out.println(a == 10); // 비교 결과 출력(true/false)</code></pre>
+        </section>
+
+        <!-- =====================================================
+             3. 조건문 & 반복문
+             ===================================================== -->
+        <section id="control">
+          <h2>3. 조건문 & 반복문 <span class="tag">필수</span></h2>
+          <p class="desc">조건문은 “갈림길”, 반복문은 “여러 번”. 문제풀이 80%가 여기임.</p>
+
+          <div class="two-col">
+            <div class="card">
+              <p class="card-title">if (조건문)</p>
+              <pre><code>if (score >= 60) {
+    System.out.println("합격");
+} else {
+    System.out.println("불합격");
+}</code></pre>
+            </div>
+
+            <div class="card">
+              <p class="card-title">for (반복문)</p>
+              <pre><code>for (int i = 0; i < 5; i++) {
+    System.out.println(i);
+}</code></pre>
+            </div>
+          </div>
+
+          <h3>break / continue</h3>
+          <div class="two-col">
+            <div class="card">
+              <p class="card-title">break</p>
+              <p class="mini">반복문을 즉시 끝냄(탈출).</p>
+              <pre><code>for(...) {
+    if (조건) break;
+}</code></pre>
+            </div>
+            <div class="card">
+              <p class="card-title">continue</p>
+              <p class="mini">아래 코드를 건너뛰고 다음 반복으로.</p>
+              <pre><code>for(...) {
+    if (조건) continue;
+    // 이 아래는 실행 안 하고 다음 반복
+}</code></pre>
+            </div>
+          </div>
+
+          <span class="pill">중첩 for문 = “서로 비교”할 때 자주 씀</span>
+          <span class="pill">예: 랜덤번호 vs 입력번호 비교</span>
+        </section>
+
+        <!-- =====================================================
+             4. 배열
+             ===================================================== -->
+        <section id="array">
+          <h2>4. 배열(array) <span class="tag">필수</span></h2>
+          <p class="desc">같은 종류의 값을 여러 개 저장. 인덱스는 0부터 시작.</p>
+
+          <div class="two-col">
+            <div class="card">
+              <p class="card-title">배열 만들기</p>
+              <pre><code>int[] arr = new int[5];   // 5칸짜리 정수 배열
+arr[0] = 10;              // 0번째 칸에 10 저장</code></pre>
+            </div>
+            <div class="card">
+              <p class="card-title">배열 출력</p>
+              <pre><code>System.out.println(Arrays.toString(arr));
+// [10, 0, 0, 0, 0]</code></pre>
+            </div>
+          </div>
+
+          <span class="pill">arr.length = 배열 길이</span>
+          <span class="pill">arr[0] 첫 칸</span>
+          <span class="pill">arr[length-1] 마지막 칸</span>
+        </section>
+
+        <!-- =====================================================
+             5. 메소드
+             ===================================================== -->
+        <section id="method">
+          <h2>5. 메소드(method) <span class="tag">중요</span></h2>
+          <p class="desc">코드를 기능별로 묶는 “기능 상자”. main도 메소드야.</p>
+
+          <div class="two-col">
+            <div class="card">
+              <p class="card-title">메소드 예시</p>
+              <pre><code>static int add(int a, int b) {
+    return a + b;
+}</code></pre>
+            </div>
+            <div class="card">
+              <p class="card-title">return</p>
+              <p class="mini">메소드 결과를 돌려주고 메소드를 종료함.</p>
+              <pre><code>return 10;   // 결과 반환 + 종료</code></pre>
+            </div>
+          </div>
+
+          <span class="pill">함수/메소드 = “기능 묶음”</span>
+          <span class="pill">return = 결과 반환</span>
+        </section>
+
+        <!-- =====================================================
+             6. 입력/출력
+             ===================================================== -->
+        <section id="io">
+          <h2>6. 입력/출력 <span class="tag">필수</span></h2>
+          <p class="desc">사용자에게 입력 받고, 화면에 출력하는 기본.</p>
+
+          <div class="two-col">
+            <div class="card">
+              <p class="card-title">출력</p>
+              <pre><code>System.out.println("한 줄 출력");
+System.out.print("줄바꿈 없음");
+System.out.printf("%d번째", 1);</code></pre>
+            </div>
+            <div class="card">
+              <p class="card-title">입력 (Scanner)</p>
+              <pre><code>Scanner sc = new Scanner(System.in);
+int n = sc.nextInt();      // 정수 입력
+String s = sc.next();      // 단어(공백 전까지)
+String line = sc.nextLine(); // 한 줄</code></pre>
+            </div>
+          </div>
+
+          <span class="pill">Scanner는 다 쓰면 close()</span>
+        </section>
+
+        <!-- =====================================================
+             7. 랜덤
+             ===================================================== -->
+        <section id="random">
+          <h2>7. 랜덤(Math.random) <span class="tag">자주 씀</span></h2>
+          <p class="desc">Math.random()은 0.0 이상 1.0 미만의 실수. 정수 만들려면 곱하고 (int)로 자름.</p>
+
+          <pre><code>// 0~9
+int n1 = (int)(Math.random() * 10);
+
+// 1~45
+int n2 = (int)(Math.random() * 45) + 1;</code></pre>
+
+          <span class="pill">*범위 공식: (int)(Math.random()*개수) + 시작값</span>
+        </section>
+
+        <!-- =====================================================
+             8. 에러/예외
+             ===================================================== -->
+        <section id="error">
+          <h2>8. 에러 vs 예외 <span class="tag">필수</span></h2>
+          <p class="desc">초보가 제일 성장하는 지점. “에러는 나쁜 게 아니라 힌트”야.</p>
+
+          <div class="two-col">
+            <div class="card">
+              <p class="card-title">컴파일 에러(문법 오류)</p>
+              <p class="mini">빨간 줄. 실행 자체가 안 됨. (괄호/세미콜론/오타)</p>
+              <pre><code>// 예: ; 빠짐, 괄호 안 닫힘 등</code></pre>
+            </div>
+            <div class="card">
+              <p class="card-title">예외(Exception)</p>
+              <p class="mini">실행 중 터지는 문제. (null, 인덱스 범위 초과 등)</p>
+              <pre><code>// 예: NullPointerException
+// 예: ArrayIndexOutOfBoundsException</code></pre>
+            </div>
+          </div>
+
+          <span class="pill">에러 메시지의 “몇 번째 줄”이 핵심</span>
+        </section>
+
+        <!-- =====================================================
+             9. 초보 생존 팁
+             ===================================================== -->
+        <section id="tips">
+          <h2>9. 초보 생존 팁 <span class="tag">강추</span></h2>
+          <p class="desc">자바 초보는 “외우기”가 아니라 “패턴 익히기”로 가야 빨리 는다.</p>
+
+          <div class="cards">
+            <div class="card">
+              <p class="card-title">1) 코드 흐름부터 보기</p>
+              <p class="mini">입력 → 처리(비교/반복) → 출력. 이 순서가 보이면 끝.</p>
+            </div>
+            <div class="card">
+              <p class="card-title">2) 배열은 0부터</p>
+              <p class="mini">인덱스 0부터 시작. 마지막은 length-1.</p>
+            </div>
+            <div class="card">
+              <p class="card-title">3) 에러는 “해석 게임”</p>
+              <p class="mini">에러 메시지 + 줄 번호 + 변수 값 확인하면 대부분 잡힘.</p>
+            </div>
+            <div class="card">
+              <p class="card-title">4) Copilot은 “보조”</p>
+              <p class="mini">자동완성은 속도는 올려도 이해는 안 올려줌. 설명은 내가 함.</p>
+            </div>
+          </div>
+
+          <h3>오늘 최소 목표</h3>
+          <p class="desc">아래 3개만 확실히 하면 “초보 탈출” 시작이야.</p>
+          <span class="pill">for문 문법</span>
+          <span class="pill">배열 접근(arr[i])</span>
+          <span class="pill">if 조건식</span>
+        </section>
+
+        <footer>
+          <div>버전: 초보자 필수 용어(읽기용) · 배경 흰색/글씨 검은색 고정</div>
+        </footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
+"""
+
+path = Path("/mnt/data/java_terms_beginner_guide.html")
+path.write_text(html, encoding="utf-8")
+print(path)
